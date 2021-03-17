@@ -26,6 +26,11 @@ class Cliente extends Model
         return $this->hasMany(Cita::class);
     }
 
+    public function historia_clinica()
+    {
+        return $this->hasOne(ClinicHistory::class);
+    }
+
     public function getAgeAttribute()
     {
         return Carbon::parse($this->fecha_nacimiento)->age;
@@ -53,6 +58,9 @@ class Cliente extends Model
     }
     public function getNacimientoAttribute($value){
         return Carbon::parse($this->fecha_nacimiento)->format('d/m/Y');
+    }
+    public function getUltimaAttribute($value){
+        return Carbon::parse($this->ultima_visita)->format('d/m/Y');
     }
 
 }

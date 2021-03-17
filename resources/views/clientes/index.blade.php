@@ -45,7 +45,7 @@
                   @csrf
                   @method('DELETE')
                   <a href="{{ route('clientes.edit', $cliente->id) }}" class="btn btn-sm btn-primary">Editar</a>
-                  <a href="{{ route('clientes.show', $cliente->id) }}" class="btn btn-sm btn-dark">Ver</a>
+                  <a href="{{ route('clientes.show', $cliente->id) }}" class="btn btn-sm btn-dark">Historia Clinica</a>
                   <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
                 </form>
                 </td>

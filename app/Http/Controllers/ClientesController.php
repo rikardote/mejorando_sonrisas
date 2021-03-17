@@ -56,7 +56,7 @@ class ClientesController extends Controller
      */
     public function show($id)
     {
-        $cliente = Cliente::findOrFail($id);
+        $cliente = Cliente::with('historia_clinica')->findOrFail($id);
         //dd($cliente);
         return view('clientes.show', compact('cliente'));
     }

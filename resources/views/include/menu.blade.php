@@ -9,75 +9,41 @@
     </li>
     <li class="nav-item">
         <a class="nav-link {{ (request()->is('clientes*')) ? 'active' : '' }}" href="{{ route('clientes.index') }}">
-          <i class="fa fa-users"></i>
+          <i class="fa fa-users text-blue"></i>
           <span class="nav-link-text">Clientes</span>
         </a>
       </li>
     <li class="nav-item">
       <a class="nav-link {{ (request()->is('user*')) ? 'active' : '' }}" href="{{ route('user.index') }}">
-        <i class="ni ni-planet text-orange"></i>
+        <i class="fa fa-user-circle text-orange"></i>
         <span class="nav-link-text">Usuarios</span>
       </a>
     </li>
     <li class="nav-item">
         <a class="nav-link {{ (request()->is('medicos*')) ? 'active' : '' }}" href="{{ route('medicos.index') }}">
-        <i class="ni ni-pin-3 text-primary"></i>
+        <i class="fa fa-user-md text-green"></i>
         <span class="nav-link-text">Medicos</span>
       </a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link {{ (request()->is('citas*')) ? 'active' : '' }}" href="{{ route('citas.index') }}">
-        <i class="ni ni-calendar-grid-58 text-primary"></i>
-        <span class="nav-link-text">Programas Citas</span>
-      </a>
-    </li>
+
     <li class="nav-item dropdown">
       <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
         aria-expanded="false">
-        <i class="ni ni-pin-3 text-primary"></i>
-        <span class="nav-link-text">U. Dropdown</span>
+        <i class="ni ni-calendar-grid-58 text-primary"></i>
+        <span class="nav-link-text">Citas</span>
       </a>
       <div class="dropdown-menu">
-        <a href="{{ route('user.create') }}" class="nav-link">
-          <i class="ni ni-single-02 text-yellow"></i>
-          <span class="nav-link-text">U. Create</span>
+        <a href="{{ route('citas.index') }}" class="nav-link">
+          <i class="ni ni-time-alarm text-orange"></i>
+          <span class="nav-link-text">Programar Cita</span>
         </a>
-        <a href="{{ route('user.index') }}" class="nav-link">
-          <i class="ni ni-single-02 text-yellow"></i>
-          <span class="nav-link-text">U. Index</span>
+        <a href="{{ route('citas.index') }}" class="nav-link">
+          <i class="ni ni-collection text-green"></i>
+          <span class="nav-link-text">Consultar Citas</span>
         </a>
       </div>
     </li>
-    <li class="nav-item">
-      <a class="nav-link" href="examples/profile.html">
-        <i class="ni ni-single-02 text-yellow"></i>
-        <span class="nav-link-text">Profile</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="examples/tables.html">
-        <i class="ni ni-bullet-list-67 text-default"></i>
-        <span class="nav-link-text">Tables</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="examples/login.html">
-        <i class="ni ni-key-25 text-info"></i>
-        <span class="nav-link-text">Login</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="examples/register.html">
-        <i class="ni ni-circle-08 text-pink"></i>
-        <span class="nav-link-text">Register</span>
-      </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="examples/upgrade.html">
-        <i class="ni ni-send text-dark"></i>
-        <span class="nav-link-text">Upgrade</span>
-      </a>
-    </li>
+
   </ul>
   <!-- Divider -->
   <hr class="my-3">

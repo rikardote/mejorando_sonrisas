@@ -40,7 +40,8 @@
                   @csrf
                   @method('DELETE')
                   <a href="{{ route('citas.edit', $cita->id) }}" class="btn btn-sm btn-primary">Editar</a>
-                  <a href="{{ route('citas.show', $cita->id) }}" class="btn btn-sm btn-dark">Ver</a>
+                  <a href="{{ route('clientes.show', $cita->cliente_id) }}" class="btn btn-sm btn-dark">Historia Clinica</a>
+                  <a href="{{ route('citas.show', $cita->id) }}" class="btn btn-sm btn-warning">Iniciar Consulta</a>
                   <button type="submit" class="btn btn-sm btn-danger">Eliminar</button>
                 </form>
                 </td>
