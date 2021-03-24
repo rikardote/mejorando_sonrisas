@@ -37,13 +37,13 @@
                 <div class="col-lg-3">
                   <div class="form-group">
                     <label class="form-control-label" for="fecha">Fecha</label>
-                    <input type="date" id="" name="fecha" class="form-control" placeholder="10/01/2020">
+                    <input type="text" id="calendar" name="fecha" class="form-control" placeholder="10/01/2020">
                   </div>
                 </div>
                 <div class="col-lg-3">
                     <div class="form-group">
                       <label class="form-control-label" for="horario">Horario</label>
-                      <input type="time" id="" name="horario" class="form-control">
+                      <input type="text" id="time" name="horario" class="form-control">
                     </div>
                   </div>
             </div>
@@ -123,4 +123,20 @@ type="text/css">
         });
         });
     </script>
+
+<script>
+
+    flatpickr('#calendar', {
+        dateFormat: "d-m-Y",
+        locale: "es",
+    });
+    flatpickr('#time', {
+        enableTime: true,
+        noCalendar: true,
+        dateFormat: "H:i",
+        minTime: "08:00",
+        maxTime: "20:00",
+    });
+
+</script>
 @endsection

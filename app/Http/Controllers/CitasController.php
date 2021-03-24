@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Cita;
 use App\Medico;
 use App\Cliente;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -44,8 +45,9 @@ class CitasController extends Controller
     public function store(Request $request)
     {
         $cita = $request->all();
+        $cita['fecha'] = Carbon::createFromFormat('d-m-Y', $cita['fecha']);
         Cita::create($cita);
-        //toastr()->success('Cita programada exitosamente');
+        toastr()->success('Cita programada exitosamente');
 
 
         return redirect()->route('citas.index');

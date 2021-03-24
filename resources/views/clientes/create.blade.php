@@ -18,7 +18,7 @@
         <form action="{{ route('clientes.store') }}" method="POST">
           @csrf
           <h6 class="heading-small text-muted mb-4">Informacion del cliente</h6>
-          <div class="pl-lg-4">
+
             <div class="row">
               <div class="col-lg-6">
                 <div class="form-group">
@@ -41,23 +41,47 @@
                 </div>
               </div>
               <div class="col-lg-6">
-                <div class="form-group">
-                  <label class="form-control-label" for="fecha_nacimiento">Fecha de nacimiento</label>
-                  <input type="date" id="" name="fecha_nacimiento" class="form-control" placeholder="27/04/1980">
+                    <label class="form-control-label" for="fecha_nacimiento">Fecha de nacimiento</label>
+                    <div class="form-inline">
+                        <fieldset>
+                            <select name="day" id="" class="form-control">
+                                <option value="">DIA</option>
+                                @foreach($days as $day )
+                                    <option value="{{ $day }}">{{ $day }}</option>
+                                @endforeach
+                            </select>
+                        </fieldset>
+                        <fieldset>
+                            <select name="month" id="" class="form-control">
+                                    <option value="">MES</option>
+                                    @foreach($months as $month)
+                                        <option value="{{ $month }}">{{ $month }}</option>
+                                    @endforeach
+                            </select>
+                        </fieldset>
+                        <fieldset>
+                            <select name="year" id="" class="form-control">
+                                <option value="">AÑO</option>
+                                @foreach($years as $year )
+                                    <option value="{{ $year }}">{{ $year }}</option>
+                                @endforeach
+                            </select>
+                        </fieldset>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="row">
+
+        </div>
+        <div class="row">
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="telefono_1">Telefono principal</label>
-                    <input type="text" id="telefono_1" name="telefono_1" class="form-control" placeholder="6862336598">
+                    <input type="text" id="phone-number" name="telefono_1" maxlength="14" class="form-control" placeholder="(686) 233-6598">
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="form-group">
                     <label class="form-control-label" for="telefono_2">Telefono Secundario</label>
-                    <input type="text" id="" name="telefono_2" class="form-control" placeholder="6862659878">
+                    <input type="text" id="phone-number2" name="telefono_2" maxlength="14" class="form-control" placeholder="(686) 265-9878">
                   </div>
                 </div>
             </div>
@@ -116,7 +140,7 @@
       </div>
     </div>
   </div>
-</div>
+
 @endsection
 
 @section('scripts')
@@ -125,6 +149,121 @@
     <script>
     $('.datepicker').datepicker({
             format: 'dd/mm/yyyy',
+        });
+    </script>
+    <script>
+        $('#phone-number')
+
+        .keydown(function (e) {
+            var key = e.which || e.charCode || e.keyCode || 0;
+            $phone = $(this);
+
+        // Don't let them remove the starting '('
+        if ($phone.val().length === 1 && (key === 8 || key === 46)) {
+                $phone.val('(');
+        return false;
+            }
+        // Reset if they highlight and type over first char.
+        else if ($phone.val().charAt(0) !== '(') {
+                $phone.val('('+String.fromCharCode(e.keyCode)+'');
+            }
+
+            // Auto-format- do not expose the mask as the user begins to type
+            if (key !== 8 && key !== 9) {
+                if ($phone.val().length === 4) {
+                    $phone.val($phone.val() + ')');
+                }
+                if ($phone.val().length === 5) {
+                    $phone.val($phone.val() + ' ');
+                }
+                if ($phone.val().length === 9) {
+                    $phone.val($phone.val() + '-');
+                }
+            }
+
+            // Allow numeric (and tab, backspace, delete) keys only
+            return (key == 8 ||
+                    key == 9 ||
+                    key == 46 ||
+                    (key >= 48 && key <= 57) ||
+                    (key >= 96 && key <= 105));
+        })
+
+        .bind('focus click', function () {
+            $phone = $(this);
+
+            if ($phone.val().length === 0) {
+                $phone.val('(');
+            }
+            else {
+                var val = $phone.val();
+                $phone.val('').val(val); // Ensure cursor remains at the end
+            }
+        })
+
+        .blur(function () {
+            $phone = $(this);
+
+            if ($phone.val() === '(') {
+                $phone.val('');
+            }
+        });
+
+        $('#phone-number2')
+
+        .keydown(function (e) {
+            var key = e.which || e.charCode || e.keyCode || 0;
+            $phone = $(this);
+
+        // Don't let them remove the starting '('
+        if ($phone.val().length === 1 && (key === 8 || key === 46)) {
+                $phone.val('(');
+        return false;
+            }
+        // Reset if they highlight and type over first char.
+        else if ($phone.val().charAt(0) !== '(') {
+                $phone.val('('+String.fromCharCode(e.keyCode)+'');
+            }
+
+            // Auto-format- do not expose the mask as the user begins to type
+            if (key !== 8 && key !== 9) {
+                if ($phone.val().length === 4) {
+                    $phone.val($phone.val() + ')');
+                }
+                if ($phone.val().length === 5) {
+                    $phone.val($phone.val() + ' ');
+                }
+                if ($phone.val().length === 9) {
+                    $phone.val($phone.val() + '-');
+                }
+            }
+
+            // Allow numeric (and tab, backspace, delete) keys only
+            return (key == 8 ||
+                    key == 9 ||
+                    key == 46 ||
+                    (key >= 48 && key <= 57) ||
+                    (key >= 96 && key <= 105));
+        })
+
+        .bind('focus click', function () {
+            $phone = $(this);
+
+            if ($phone.val().length === 0) {
+                $phone.val('(');
+            }
+            else {
+                var val = $phone.val();
+                $phone.val('').val(val); // Ensure cursor remains at the end
+            }
+        })
+
+        .blur(function () {
+            $phone = $(this);
+
+            if ($phone.val() === '(') {
+                $phone.val('');
+            }
         });
     </script>
 

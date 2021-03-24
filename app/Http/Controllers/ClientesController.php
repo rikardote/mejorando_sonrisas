@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Refer;
 use App\Cliente;
-use Yajra\DataTables\DataTables;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Yajra\DataTables\DataTables;
 
 class ClientesController extends Controller
 {
@@ -31,8 +32,19 @@ class ClientesController extends Controller
     public function create()
     {
         $refers = Refer::all();
+        for($y = date('Y'); $y >= date('Y', strtotime('-100 years')); $y--){
+            $years[$y] = $y;
+        }
+        $calendarInfo = cal_info(CAL_GREGORIAN);
+        $months = array_combine(range(1, count($calendarInfo['months'])), $calendarInfo['months']);
+         /*for($m = 1; $m <= 12; $m++){
+            $months[$m] = str_pad($m, 2, 0, STR_PAD_LEFT);
+        }*/
+        for($d = 1; $d <= 31; $d++){
+            $days[$d] = str_pad($d, 2, 0, STR_PAD_LEFT);
+        }
 
-        return view('clientes.create', compact('refers'));
+        return view('clientes.create', compact('refers', 'years', 'months', 'days'));
     }
 
     /**
@@ -44,6 +56,8 @@ class ClientesController extends Controller
     public function store(Request $request)
     {
         $cliente = $request->all();
+        $cliente['fecha'] = $cliente['day'].'-'.$cliente['month'].'-'.$cliente['year'];
+        $cliente['fecha_nacimiento'] = Carbon::createFromFormat('d-m-Y', $cliente['fecha']);
         Cliente::create($cliente);
         return redirect()->route('clientes.index');
     }
